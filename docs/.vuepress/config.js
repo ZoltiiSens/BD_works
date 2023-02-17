@@ -78,7 +78,7 @@ module.exports = {
     docsDir: 'docs',
     docsBranch: 'master',
   },
-  title: 'Назва проєкту',
+  title: 'Система організації та управління опитуваннями експертів',
   description: 'Лабораторні роботи з дисципліни "Організація баз даних"',
   configureWebpack: {
     resolve: {
