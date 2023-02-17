@@ -16,9 +16,6 @@ git init
 git add -A
 git commit -m 'deploy'
 
-# if you are deploying to https://<USERNAME>.github.io
-#git push -f git@github.com:whtspoint.github.io.git master
-
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
 git push -f https://github.com/ZoltiiSens/BD_works master:gh-pages
 
