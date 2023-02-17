@@ -1,4 +1,3 @@
-// .vuepress/config.js
 module.exports = {
   plugins: [
     '@vuepress/back-to-top', 
@@ -7,7 +6,6 @@ module.exports = {
       serviceWorker: true,
       updatePopup: true
     },
-    ,
     ['container', {
       type: 'vue',
       before: '<pre class="vue-container"><code>',
@@ -15,7 +13,7 @@ module.exports = {
     }]
   ],
   port: 3030,
-  base: '/edu_db_labs/',
+  base: '/BD_works/',
   theme: 'cool',
   // dest: 'dist',
   head: [
@@ -25,7 +23,6 @@ module.exports = {
     
   ],
   themeConfig: {
-    // logo: './myAvatar.png',
     sidebar: [
     {
       title: 'Вступ',
@@ -67,33 +64,19 @@ module.exports = {
 
   ],
     sidebarDepth: 2,
-    displayAllHeaders: true, // Default: false
+    displayAllHeaders: true,
 
 
     nav: [
       { text: 'Початок', link: '/' },
     ],
 
-    lastUpdated: 'Останнє оновлення', // string | boolean
-      // Assumes GitHub. Can also be a full GitLab url.
-    repo: 'https://github.com/edu-db/edu_db_labs',
-    // Customising the header label
-    // Defaults to "GitHub"/"GitLab"/"Bitbucket" depending on `themeConfig.repo`
+    lastUpdated: 'Останнє оновлення',
+    repo: 'https://github.com/ZoltiiSens/BD_works',
+    // Customising the header labe
     repoLabel: 'Github',
-
-    // Optional options for generating "Edit this page" link
-
-    // if your docs are in a different repo from your main project:
-    // docsRepo: 'boldak/dis-edu',
-    // if your docs are not at the root of the repo:
     docsDir: 'docs',
-    // if your docs are in a specific branch (defaults to 'master'):
     docsBranch: 'master',
-    // defaults to false, set to true to enable
-    // editLinks: true,
-    // custom text for edit link. Defaults to "Edit this page"
-    // editLinkText: 'Ви можете покращити цю сторінку'
-
   },
   title: 'Назва проєкту',
   description: 'Лабораторні роботи з дисципліни "Організація баз даних"',
