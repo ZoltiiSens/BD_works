@@ -1,149 +1,126 @@
 # Модель прецедентів
 
-В цьому файлі необхідно перелічити всі документи, розроблені в проєкті та дати посилання на них.
-
-*Модель прецедентів повинна містити загальні оглядові діаграми та специфікації прецедентів.*
-
-
-
-Вбудовування зображень діаграм здійснюється з використанням сервісу [plantuml.com](https://plantuml.com/). 
-
-В markdown-файлі використовується опис діаграми
-
-```md
-
-<center style="
-    border-radius:4px;
-    border: 1px solid #cfd7e6;
-    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
-    padding: 1em;"
->
-
+## 1. Діаграма прецедентів
 @startuml
 
-    right header
-        <font size=24 color=black>Package: <b>UCD_3.0
-    end header
+usecase "Зареєструватись" as NEW_CUSTOMER_CREATE
+usecase "Авторизуватись" as CUSTOMER_LOGIN
+usecase "Пройти опитування" as TAKE_SURVEY
+usecase "Подивитись доступні опитування" as LOOK_SURVEY
+usecase "Подивитись пройдені опитування" as COMPLETED_SURVEY
+usecase "Створити нове опитування" as CREATE_SURVEY
+usecase "Редагувати опитування" as EDIT_SURVEY
+usecase "Надати інформацію щодо опитування" as EXPLAIN_SURVEY
+usecase "Видалити користувача" as BAN_USER
+usecase "Видалити опитування" as DELETE_SURVEY
 
-    title
-        <font size=18 color=black>UC_8. Редагувати конфігурацію порталу
-        <font size=16 color=black>Діаграма прецедентів
-    end title
+
+Гість ---> NEW_CUSTOMER_CREATE
+Гість ---> TAKE_SURVEY
+Гість ---> LOOK_SURVEY
+Респондент ---> CUSTOMER_LOGIN
+Респондент ---> COMPLETED_SURVEY
+Інтервюер ---> CREATE_SURVEY
+Інтервюер ---> EDIT_SURVEY
+Адміністратор ---> EXPLAIN_SURVEY
+Адміністратор ---> BAN_USER
+Адміністратор ---> DELETE_SURVEY
 
 
-    actor "Користувач" as User #eeeeaa
-    
-    package UCD_1{
-        usecase "<b>UC_1</b>\nПереглянути список \nзвітів" as UC_1 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1</b>\nЗастосувати фільтр" as UC_1.1
-    usecase "<b>UC_1.2</b>\nПереглянути метадані \nзвіту" as UC_1.2  
-    usecase "<b>UC_1.2.1</b>\nДати оцінку звіту" as UC_1.2.1  
-    usecase "<b>UC_1.2.2</b>\nПереглянути інформацію \nпро авторів звіту" as UC_1.2.2
-    
-    package UCD_1 {
-        usecase "<b>UC_4</b>\nВикликати звіт" as UC_4 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1.1</b>\n Використати \nпошукові теги" as UC_1.1.1  
-    usecase "<b>UC_1.1.2</b>\n Використати \nрядок пошуку" as UC_1.1.2
-    usecase "<b>UC_1.1.3</b>\n Використати \nавторів" as UC_1.1.3  
-    
-    
-    
-    User -> UC_1
-    UC_1.1 .u.> UC_1 :extends
-    UC_1.2 .u.> UC_1 :extends
-    UC_4 .d.> UC_1.2 :extends
-    UC_1.2 .> UC_1.2 :extends
-    UC_1.2.1 .u.> UC_1.2 :extends
-    UC_1.2.2 .u.> UC_1.2 :extends
-    UC_1 ..> UC_1.2.2 :extends
-    
-    
-    UC_1.1.1 -u-|> UC_1.1
-    UC_1.1.2 -u-|> UC_1.1
-    UC_1.1.3 -u-|> UC_1.1
-    
-    right footer
-        Аналітичний портал. Модель прецедентів.
-        НТУУ КПІ ім.І.Сікорського
-        Киів-2020
-    end footer
+Гість ---|> Респондент
+Респондент ---|> Інтервюер
+Інтервюер ---|> Адміністратор
+
 
 @enduml
-
-**Діаграма прецедецнтів**
-
-</center>
-```
-
-яка буде відображена наступним чином
-
-<center style="
-    border-radius:4px;
-    border: 1px solid #cfd7e6;
-    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
-    padding: 1em;"
->
-
+## 2. Usecases для гостя
 @startuml
 
-    right header
-        <font size=24 color=black>Package: <b>UCD_3.0
-    end header
+usecase "Зареєструватись" as NEW_CUSTOMER_CREATE
+usecase "Пройти опитування" as TAKE_SURVEY
+usecase "Подивитись доступні опитування" as LOOK_SURVEY
+usecase "Додати фото профіля" as ADD_PROFILE_PHOTO
+usecase "Обрати логін" as CHOOSE_NICKNAME
+usecase "Встановити пароль" as CHOOSE_PASSWORD
 
-    title
-        <font size=18 color=black>UC_8. Редагувати конфігурацію порталу
-        <font size=16 color=black>Діаграма прецедентів
-    end title
+Гість ---> NEW_CUSTOMER_CREATE
+Гість ---> TAKE_SURVEY
+Гість ---> LOOK_SURVEY
 
-
-    actor "Користувач" as User #eeeeaa
-    
-    package UCD_1{
-        usecase "<b>UC_1</b>\nПереглянути список \nзвітів" as UC_1 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1</b>\nЗастосувати фільтр" as UC_1.1
-    usecase "<b>UC_1.2</b>\nПереглянути метадані \nзвіту" as UC_1.2  
-    usecase "<b>UC_1.2.1</b>\nДати оцінку звіту" as UC_1.2.1  
-    usecase "<b>UC_1.2.2</b>\nПереглянути інформацію \nпро авторів звіту" as UC_1.2.2
-    
-    package UCD_1 {
-        usecase "<b>UC_4</b>\nВикликати звіт" as UC_4 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1.1</b>\n Використати \nпошукові теги" as UC_1.1.1  
-    usecase "<b>UC_1.1.2</b>\n Використати \nрядок пошуку" as UC_1.1.2
-    usecase "<b>UC_1.1.3</b>\n Використати \nавторів" as UC_1.1.3  
-    
-    
-    
-    User -> UC_1
-    UC_1.1 .u.> UC_1 :extends
-    UC_1.2 .u.> UC_1 :extends
-    UC_4 .d.> UC_1.2 :extends
-    UC_1.2 .> UC_1.2 :extends
-    UC_1.2.1 .u.> UC_1.2 :extends
-    UC_1.2.2 .u.> UC_1.2 :extends
-    UC_1 ..> UC_1.2.2 :extends
-    
-    
-    UC_1.1.1 -u-|> UC_1.1
-    UC_1.1.2 -u-|> UC_1.1
-    UC_1.1.3 -u-|> UC_1.1
-    
-    right footer
-        Аналітичний портал. Модель прецедентів.
-        НТУУ КПІ ім.І.Сікорського
-        Киів-2020
-    end footer
+ADD_PROFILE_PHOTO  ...> NEW_CUSTOMER_CREATE: extends
+CHOOSE_NICKNAME ...> NEW_CUSTOMER_CREATE: extends
+CHOOSE_PASSWORD ...> NEW_CUSTOMER_CREATE: extends
 
 @enduml
+## 3. Usecases для респондента
+@startuml
 
-**Діаграма прецедентів**
+usecase "Авторизуватись" as CUSTOMER_LOGIN
+usecase "Подивитись пройдені опитування" as COMPLETED_SURVEY
+usecase "Відновити пароль" as RESTORE_PASSWORD
 
-</center>
+Респондент ---> CUSTOMER_LOGIN
+Респондент ---> COMPLETED_SURVEY
 
+RESTORE_PASSWORD ...> CUSTOMER_LOGIN: extends
+
+@enduml
+## 4. Usecases для інтерв'юера
+@startuml
+usecase "Налаштувати нове опитування" as SET_SURVEY
+usecase "Створити нове опитування" as CREATE_SURVEY
+usecase "Редагувати опитування" as EDIT_SURVEY
+
+Інтервюер ---> CREATE_SURVEY
+Інтервюер ---> EDIT_SURVEY
+
+SET_SURVEY ...> CREATE_SURVEY: extends
+
+@enduml
+## 5. Usecases для адміністратора
+@startuml
+usecase "Надати інформацію щодо опитування" as EXPLAIN_SURVEY
+usecase "Видалити користувача" as BAN_USER
+usecase "Видалити опитування" as DELETE_SURVEY
+
+Адміністратор ---> EXPLAIN_SURVEY
+Адміністратор ---> BAN_USER
+Адміністратор ---> DELETE_SURVEY
+
+@enduml
+## 7. Сценарії
+| **1. ID:**             | NEW_CUSTOMER_CREATION                     |
+|------------------------|-------------------------------------------|
+| **НАЗВА:**             | Створити обліковий запис                  |
+| **УЧАСНИКИ:**          | Клієнт, система                           |
+| **ПЕРЕДУМОВИ:**        | Клієнт не має облікового запису           |
+| **РЕЗУЛЬТАТ:**         | Обліковий запис                           |
+| **ВИКЛЮЧНІ СИТУАЦІЇ:** | Некорректно введені дані                  |
+| **ОСНОВНІ СЦЕНАРІЇ:**  | 1. Клієнт заповнює форму                  |
+|                        | 2. Система перевіряє надані дані          |
+|                        | 3. Система зберігає інформацю про клієнта |
+|                        | 4. Система створює обліковий запис        |
+|                        | 5. Система надає обліковий запис клієнту  |
+@startuml
+|Клієнт|
+start;
+:Клікає на "Зареєструватись";
+
+|Система|
+:Генерує форму реєстрації;
+:Відправляє форму реєстрації;
+
+|Клієнт|
+:Приймає форму реєстрація;
+:Заповнює форму реєстрації;
+:Клікає на "Відправити";
+
+|Система|
+:Перевіряє надані дані;
+:Зберігає інформацію про клієнта;
+:Створює обліковий запис;
+:Надає обліковий запис;
+
+|Клієнт|
+stop;
+@enduml
