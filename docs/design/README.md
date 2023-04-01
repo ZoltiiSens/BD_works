@@ -86,5 +86,65 @@ SelectedOption "0,*" -r- "1,1" Answer
 @enduml
 
 ## ER-модель
+@startuml 
 
+entity Role  {
+    id: INT 
+    title: TEXT 
+}
+
+entity User { 
+    id: INT 
+    email: TEXT 
+    password: TEXT 
+    username: TEXT  
+}
+
+entity Action {
+    id: INT
+    status: TEXT
+    date: DATE
+}
+
+entity Survey {
+    id: INT
+    title: TEXT
+    description: TEXT
+    creationDate: DATE
+    expirationDate: DATE
+    status: TEXT
+}
+
+entity Question { 
+    id: INT 
+    content: TEXT 
+}
+
+entity Option { 
+    id:INT 
+    type:TEXT 
+}
+
+entity SelectedOption {
+    id: INT
+    content: TEXT
+}
+
+entity Answer  {  
+    id:INT  
+    creationDate: DATE 
+}
+
+
+
+Role "1, 1" <-- "0, *" User  
+User "1, 1" <-- "0, *" Answer
+User "1, 1" <-- "0, *" Action
+Answer "0, 1" --> "1, 1" Question 
+Option "1, 1" <-- "0, *" Question
+Survey "1, 1" <-- "0, *" Question
+SelectedOption "0, *" --> "1, 1" Option 
+SelectedOption "0, *" --> "1, 1" Answer
+
+@enduml
 ## Реляційна схема
