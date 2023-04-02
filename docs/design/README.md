@@ -148,3 +148,5 @@ SelectedOption "0, *" --> "1, 1" Answer
 
 @enduml
 ## Реляційна схема
+
+<img src="../../img.png"/>
