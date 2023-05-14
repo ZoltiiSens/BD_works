@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Реалізація інформаційного та програмного забезпечення | PollWizard</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/BD_works/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="description" content="Лабораторні роботи з дисципліни &quot;Організація баз даних&quot;">
+    
+    <link rel="preload" href="/BD_works/assets/css/0.styles.0b12a3cc.css" as="style"><link rel="preload" href="/BD_works/assets/js/app.d3109603.js" as="script"><link rel="preload" href="/BD_works/assets/js/2.3205284a.js" as="script"><link rel="preload" href="/BD_works/assets/js/23.d52b08e3.js" as="script"><link rel="prefetch" href="/BD_works/assets/js/10.eac57dfe.js"><link rel="prefetch" href="/BD_works/assets/js/11.fce56113.js"><link rel="prefetch" href="/BD_works/assets/js/12.1183a11d.js"><link rel="prefetch" href="/BD_works/assets/js/13.9ec96c11.js"><link rel="prefetch" href="/BD_works/assets/js/14.77bf6617.js"><link rel="prefetch" href="/BD_works/assets/js/15.76f3ea39.js"><link rel="prefetch" href="/BD_works/assets/js/16.b51686ce.js"><link rel="prefetch" href="/BD_works/assets/js/17.0578cd4a.js"><link rel="prefetch" href="/BD_works/assets/js/18.b86da22f.js"><link rel="prefetch" href="/BD_works/assets/js/19.01f0169c.js"><link rel="prefetch" href="/BD_works/assets/js/20.99ac5c46.js"><link rel="prefetch" href="/BD_works/assets/js/21.fa0217fe.js"><link rel="prefetch" href="/BD_works/assets/js/22.0fedb578.js"><link rel="prefetch" href="/BD_works/assets/js/24.4ce5be5f.js"><link rel="prefetch" href="/BD_works/assets/js/25.e1380213.js"><link rel="prefetch" href="/BD_works/assets/js/26.035f2080.js"><link rel="prefetch" href="/BD_works/assets/js/3.17ca8910.js"><link rel="prefetch" href="/BD_works/assets/js/4.f87a805a.js"><link rel="prefetch" href="/BD_works/assets/js/5.478a3daf.js"><link rel="prefetch" href="/BD_works/assets/js/6.53bd333b.js"><link rel="prefetch" href="/BD_works/assets/js/7.e284800a.js"><link rel="prefetch" href="/BD_works/assets/js/8.e512d643.js"><link rel="prefetch" href="/BD_works/assets/js/9.0a5c95ae.js">
+    <link rel="stylesheet" href="/BD_works/assets/css/0.styles.0b12a3cc.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/BD_works/" class="home-link router-link-active"><!----> <span class="site-name">PollWizard</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/BD_works/" class="nav-link">
+  Початок
+</a></div> <a href="https://github.com/ZoltiiSens/BD_works" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/BD_works/" class="nav-link">
+  Початок
+</a></div> <a href="https://github.com/ZoltiiSens/BD_works" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/BD_works/intro/" class="sidebar-link">Вступ</a></li><li><section class="sidebar-group collapsable depth-0"><a href="/BD_works/requirements/" class="sidebar-heading clickable"><span>Розроблення загальних вимог до системи</span> <span class="arrow right"></span></a> <!----></section></li><li><a href="/BD_works/use%20cases/" class="sidebar-link">Розроблення вимог до функціональности системи</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/BD_works/use%20cases/#_1-діаграма-прецедентів" class="sidebar-link">1. Діаграма прецедентів</a></li><li class="sidebar-sub-header"><a href="/BD_works/use%20cases/#_2-usecases-для-гостя" class="sidebar-link">2. Usecases для гостя</a></li><li class="sidebar-sub-header"><a href="/BD_works/use%20cases/#_3-usecases-для-респондента" class="sidebar-link">3. Usecases для респондента</a></li><li class="sidebar-sub-header"><a href="/BD_works/use%20cases/#_4-usecases-для-інтерв-юера" class="sidebar-link">4. Usecases для інтерв'юера</a></li><li class="sidebar-sub-header"><a href="/BD_works/use%20cases/#_5-usecases-для-адміністратора" class="sidebar-link">5. Usecases для адміністратора</a></li><li class="sidebar-sub-header"><a href="/BD_works/use%20cases/#_6-сценаріі" class="sidebar-link">6. Сценарії</a></li></ul></li><li><a href="/BD_works/design/" class="sidebar-link">Проектування інформаційного забезпечення</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/BD_works/design/#модель-бізнес-об-єктів" class="sidebar-link">Модель бізнес-об'єктів</a></li><li class="sidebar-sub-header"><a href="/BD_works/design/#er-модель" class="sidebar-link">ER-модель</a></li><li class="sidebar-sub-header"><a href="/BD_works/design/#реляціина-схема" class="sidebar-link">Реляційна схема</a></li></ul></li><li><a href="/BD_works/software/" aria-current="page" class="active sidebar-link">Реалізація інформаційного та програмного забезпечення</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/BD_works/software/#sql-скрипт-для-створення-на-початкового-наповнення-бази-даних" class="sidebar-link">SQL-скрипт для створення на початкового наповнення бази даних</a></li><li class="sidebar-sub-header"><a href="/BD_works/software/#restfull-сервіс-для-управління-даними" class="sidebar-link">RESTfull сервіс для управління даними</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/BD_works/software/#фаил-index-ts" class="sidebar-link">Файл index.ts</a></li><li class="sidebar-sub-header"><a href="/BD_works/software/#фаил-user-repository-ts" class="sidebar-link">Файл User.repository.ts</a></li><li class="sidebar-sub-header"><a href="/BD_works/software/#фаил-database-ts" class="sidebar-link">Файл database.ts</a></li><li class="sidebar-sub-header"><a href="/BD_works/software/#фаил-user-controller-ts" class="sidebar-link">Файл User.controller.ts</a></li></ul></li></ul></li><li><a href="/BD_works/test/" class="sidebar-link">Тестування працездатності системи</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/BD_works/test/#створення-користувача-успішнии-запит" class="sidebar-link">Створення користувача (успішний запит)</a></li><li class="sidebar-sub-header"><a href="/BD_works/test/#створення-користувача-невірнии-логін" class="sidebar-link">Створення користувача (невірний логін)</a></li><li class="sidebar-sub-header"><a href="/BD_works/test/#створення-користувача-неваліднии-email" class="sidebar-link">Створення користувача (невалідний email)</a></li><li class="sidebar-sub-header"><a href="/BD_works/test/#пошук-користувача-за-id-успішнии" class="sidebar-link">Пошук користувача за ID (успішний)</a></li><li class="sidebar-sub-header"><a href="/BD_works/test/#пошук-користувача-за-id-користувача-не-існує" class="sidebar-link">Пошук користувача за ID (користувача не існує)</a></li><li class="sidebar-sub-header"><a href="/BD_works/test/#оновлення-користувача" class="sidebar-link">Оновлення користувача</a></li><li class="sidebar-sub-header"><a href="/BD_works/test/#оновлении-користувач" class="sidebar-link">Оновлений користувач</a></li><li class="sidebar-sub-header"><a href="/BD_works/test/#оновлення-користувача-користувача-не-існує" class="sidebar-link">Оновлення користувача (Користувача не існує)</a></li><li class="sidebar-sub-header"><a href="/BD_works/test/#оновлення-користувача-немає-змін" class="sidebar-link">Оновлення користувача (Немає змін)</a></li><li class="sidebar-sub-header"><a href="/BD_works/test/#видалення-користувача" class="sidebar-link">Видалення користувача</a></li><li class="sidebar-sub-header"><a href="/BD_works/test/#видалення-користувача-користувача-не-існує" class="sidebar-link">Видалення користувача (Користувача не існує)</a></li></ul></li><li><a href="/BD_works/conclusion/" class="sidebar-link">Висновки</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="реалізація-інформаціиного-та-програмного-забезпечення"><a href="#реалізація-інформаціиного-та-програмного-забезпечення" class="header-anchor">#</a> Реалізація інформаційного та програмного забезпечення</h1> <h2 id="sql-скрипт-для-створення-на-початкового-наповнення-бази-даних"><a href="#sql-скрипт-для-створення-на-початкового-наповнення-бази-даних" class="header-anchor">#</a> SQL-скрипт для створення на початкового наповнення бази даних</h2> <div class="language- extra-class"><pre class="language-text"><code>SET SQL_MODE = &quot;NO_AUTO_VALUE_ON_ZERO&quot;;
+START TRANSACTION;
+SET time_zone = &quot;+00:00&quot;;
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- База даних: `project_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `action`
+--
+
+CREATE TABLE `action` (
+  `id` int(11) NOT NULL,
+  `status` text NOT NULL,
+  `date` date NOT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `answer`
+--
+
+CREATE TABLE `answer` (
+  `id` int(11) NOT NULL,
+  `creationDate` date NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `question_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `options`
+--
+
+CREATE TABLE `options` (
+  `id` int(11) NOT NULL,
+  `type` text NOT NULL,
+  `question_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `question`
+--
+
+CREATE TABLE `question` (
+  `id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `survey_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `role`
+--
+
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `selectedoption`
+--
+
+CREATE TABLE `selectedoption` (
+  `id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `option_id` int(11) DEFAULT NULL,
+  `answer_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `survey`
+--
+
+CREATE TABLE `survey` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `description` text NOT NULL,
+  `creationDate` date NOT NULL,
+  `expirationDate` date NOT NULL,
+  `status` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  `username` text NOT NULL,
+  `role_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Індекси збережених таблиць
+--
+
+--
+-- Індекси таблиці `action`
+--
+ALTER TABLE `action`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Індекси таблиці `answer`
+--
+ALTER TABLE `answer`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `question_id` (`question_id`);
+
+--
+-- Індекси таблиці `options`
+--
+ALTER TABLE `options`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `question_id` (`question_id`);
+
+--
+-- Індекси таблиці `question`
+--
+ALTER TABLE `question`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `survey_id` (`survey_id`);
+
+--
+-- Індекси таблиці `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Індекси таблиці `selectedoption`
+--
+ALTER TABLE `selectedoption`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `option_id` (`option_id`),
+  ADD KEY `answer_id` (`answer_id`);
+
+--
+-- Індекси таблиці `survey`
+--
+ALTER TABLE `survey`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Індекси таблиці `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `role_id` (`role_id`);
+
+--
+-- AUTO_INCREMENT для збережених таблиць
+--
+
+--
+-- AUTO_INCREMENT для таблиці `action`
+--
+ALTER TABLE `action`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблиці `answer`
+--
+ALTER TABLE `answer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблиці `options`
+--
+ALTER TABLE `options`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблиці `question`
+--
+ALTER TABLE `question`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблиці `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблиці `selectedoption`
+--
+ALTER TABLE `selectedoption`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблиці `survey`
+--
+ALTER TABLE `survey`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблиці `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Обмеження зовнішнього ключа збережених таблиць
+--
+
+--
+-- Обмеження зовнішнього ключа таблиці `action`
+--
+ALTER TABLE `action`
+  ADD CONSTRAINT `action_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Обмеження зовнішнього ключа таблиці `answer`
+--
+ALTER TABLE `answer`
+  ADD CONSTRAINT `answer_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `answer_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`);
+
+--
+-- Обмеження зовнішнього ключа таблиці `options`
+--
+ALTER TABLE `options`
+  ADD CONSTRAINT `options_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`);
+
+--
+-- Обмеження зовнішнього ключа таблиці `question`
+--
+ALTER TABLE `question`
+  ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`id`);
+
+--
+-- Обмеження зовнішнього ключа таблиці `selectedoption`
+--
+ALTER TABLE `selectedoption`
+  ADD CONSTRAINT `selectedoption_ibfk_1` FOREIGN KEY (`option_id`) REFERENCES `options` (`id`),
+  ADD CONSTRAINT `selectedoption_ibfk_2` FOREIGN KEY (`answer_id`) REFERENCES `answer` (`id`);
+
+--
+-- Обмеження зовнішнього ключа таблиці `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+</code></pre></div><h2 id="restfull-сервіс-для-управління-даними"><a href="#restfull-сервіс-для-управління-даними" class="header-anchor">#</a> RESTfull сервіс для управління даними</h2> <h3 id="фаил-index-ts"><a href="#фаил-index-ts" class="header-anchor">#</a> Файл index.ts</h3> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> _ <span class="token keyword">as</span> express <span class="token keyword">from</span> <span class="token string">&quot;express&quot;</span>
+<span class="token keyword">import</span> _ <span class="token keyword">as</span> bodyParser <span class="token keyword">from</span> <span class="token string">&quot;body-parser&quot;</span>
+<span class="token keyword">import</span> userRouter <span class="token keyword">from</span> <span class="token string">&quot;./routers/user.router&quot;</span>
+
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>bodyParser<span class="token punctuation">.</span><span class="token function">urlencoded</span><span class="token punctuation">(</span><span class="token punctuation">{</span> extended<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>bodyParser<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>userRouter<span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span>
+</code></pre></div><h3 id="фаил-user-repository-ts"><a href="#фаил-user-repository-ts" class="header-anchor">#</a> Файл User.repository.ts</h3> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>Connection<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;mysql2/promise&quot;</span>
+<span class="token keyword">import</span> UserCreationDto <span class="token keyword">from</span> <span class="token string">&quot;../dto/user/IUserCreation.dto&quot;</span>
+<span class="token keyword">import</span> IUserUpdateDto <span class="token keyword">from</span> <span class="token string">&quot;../dto/user/IUserUpdate.dto&quot;</span>
+<span class="token keyword">import</span> prepareUpdateRows <span class="token keyword">from</span> <span class="token string">&quot;../utils/prepareUpdateRows&quot;</span>
+<span class="token keyword">import</span> IUserDto <span class="token keyword">from</span> <span class="token string">&quot;../dto/user/IUser.dto&quot;</span>
+<span class="token keyword">import</span> username <span class="token keyword">from</span> <span class="token string">&quot;../utils/data_objects/user/Username&quot;</span>
+<span class="token keyword">import</span> Id <span class="token keyword">from</span> <span class="token string">&quot;../utils/data_objects/user/Id&quot;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">UserRepository</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span> \_database<span class="token operator">:</span> Connection
+
+    <span class="token function">constructor</span><span class="token punctuation">(</span>database<span class="token operator">:</span> Connection<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_database <span class="token operator">=</span> database
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span> email<span class="token punctuation">,</span> password<span class="token punctuation">,</span> username <span class="token punctuation">}</span><span class="token operator">:</span> UserCreationDto<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_database<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span>
+            <span class="token string">&quot;INSERT INTO user(email, password, username) VALUES (?,?,?)&quot;</span><span class="token punctuation">,</span>
+            <span class="token punctuation">[</span>email<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> password<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> username<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> username<span class="token punctuation">,</span> password<span class="token punctuation">,</span> email<span class="token punctuation">,</span> id <span class="token punctuation">}</span><span class="token operator">:</span> IUserUpdateDto<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_validateUserExisting</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+        <span class="token keyword">const</span> <span class="token punctuation">[</span>updateLine<span class="token punctuation">,</span> params<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">prepareUpdateRows</span><span class="token punctuation">(</span>
+            <span class="token punctuation">[</span><span class="token string">&quot;username&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;password&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;email&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>username<span class="token operator">:</span> username<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> password<span class="token operator">:</span> password<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> email<span class="token operator">:</span> email<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+        <span class="token punctuation">)</span>
+        <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_database<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span>
+            <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">UPDATE user SET </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>updateLine<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> WHERE id = ?</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+            <span class="token punctuation">[</span><span class="token operator">...</span>params<span class="token punctuation">,</span> id<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token function">getById</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Id<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>IUserDto<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_validateUserExisting</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+        <span class="token keyword">const</span> <span class="token punctuation">[</span>row<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_database<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT * FROM user WHERE id = ?&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>id<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> row<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token keyword">delete</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Id<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_validateUserExisting</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+        <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_database<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token string">&quot;DELETE FROM user WHERE id = ?&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>id<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token function">isExists</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Id<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> <span class="token punctuation">[</span>row<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_database<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT COUNT(*) = 1 as isExists FROM user WHERE id = ?&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>id<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> row<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">&quot;isExists&quot;</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">async</span> <span class="token function">_validateUserExisting</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Id<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">isExists</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&quot;No user with this id&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> UserRepository
+</code></pre></div><h3 id="фаил-database-ts"><a href="#фаил-database-ts" class="header-anchor">#</a> Файл database.ts</h3> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> createConnection<span class="token punctuation">,</span> Connection <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;mysql2/promise&quot;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Database</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> \_connection<span class="token operator">:</span> Connection
+
+     <span class="token keyword">async</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>Connection<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+         <span class="token keyword">if</span> <span class="token punctuation">(</span>Database<span class="token punctuation">.</span>_connection<span class="token punctuation">)</span> <span class="token keyword">return</span> Database<span class="token punctuation">.</span>_connection
+         <span class="token keyword">return</span> Database<span class="token punctuation">.</span>_connection <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">createConnection</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+             host<span class="token operator">:</span> <span class="token string">&quot;localhost&quot;</span><span class="token punctuation">,</span>
+             user<span class="token operator">:</span> <span class="token string">&quot;root&quot;</span><span class="token punctuation">,</span>
+             password<span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+             database<span class="token operator">:</span> <span class="token string">&quot;project_db&quot;</span>
+         <span class="token punctuation">}</span><span class="token punctuation">)</span>
+     <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> Database
+</code></pre></div><h3 id="фаил-user-controller-ts"><a href="#фаил-user-controller-ts" class="header-anchor">#</a> Файл User.controller.ts</h3> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> \<span class="token operator">*</span> <span class="token keyword">as</span> express <span class="token keyword">from</span> <span class="token string">&quot;express&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> IUserRepository <span class="token keyword">from</span> <span class="token string">&quot;./interfaces/IUserRepository&quot;</span>
+<span class="token keyword">import</span> Username <span class="token keyword">from</span> <span class="token string">&quot;../../utils/data_objects/user/Username&quot;</span>
+<span class="token keyword">import</span> Email <span class="token keyword">from</span> <span class="token string">&quot;../../utils/data_objects/Email&quot;</span>
+<span class="token keyword">import</span> Password <span class="token keyword">from</span> <span class="token string">&quot;../../utils/data_objects/user/Password&quot;</span>
+<span class="token keyword">import</span> Id <span class="token keyword">from</span> <span class="token string">&quot;../../utils/data_objects/user/Id&quot;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">UserController</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span> \_repository<span class="token operator">:</span> IUserRepository
+
+    <span class="token keyword">public</span> <span class="token function">constructor</span><span class="token punctuation">(</span>repository<span class="token operator">:</span> IUserRepository<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_repository <span class="token operator">=</span> repository
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token function">getById</span><span class="token punctuation">(</span>req<span class="token operator">:</span> express<span class="token punctuation">.</span>Request<span class="token punctuation">,</span> res<span class="token operator">:</span> express<span class="token punctuation">.</span>Response<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_repository<span class="token punctuation">.</span><span class="token function">getById</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Id</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>error<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token function">create</span><span class="token punctuation">(</span>req<span class="token operator">:</span> express<span class="token punctuation">.</span>Request<span class="token punctuation">,</span> res<span class="token operator">:</span> express<span class="token punctuation">.</span>Response<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> data <span class="token operator">=</span> req<span class="token punctuation">.</span>body
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_repository<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                username<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Username</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>username<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                email<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Email</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>email<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                password<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Password</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>password<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>error<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span>
+        <span class="token punctuation">}</span>
+        res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&quot;User created&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token function">update</span><span class="token punctuation">(</span>req<span class="token operator">:</span> express<span class="token punctuation">.</span>Request<span class="token punctuation">,</span> res<span class="token operator">:</span> express<span class="token punctuation">.</span>Response<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> data <span class="token operator">=</span> req<span class="token punctuation">.</span>body
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">const</span> updateData <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>username <span class="token operator">!==</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> updateData<span class="token punctuation">[</span><span class="token string">&quot;username&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Username</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>username<span class="token punctuation">)</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>email <span class="token operator">!==</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> updateData<span class="token punctuation">[</span><span class="token string">&quot;email&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Email</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>email<span class="token punctuation">)</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>password <span class="token operator">!==</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> updateData<span class="token punctuation">[</span><span class="token string">&quot;password&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Password</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>password<span class="token punctuation">)</span>
+            <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_repository<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token operator">...</span>updateData<span class="token punctuation">,</span> id<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Id</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+            res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&quot;User updated&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>error<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token keyword">delete</span><span class="token punctuation">(</span>req<span class="token operator">:</span> express<span class="token punctuation">.</span>Request<span class="token punctuation">,</span> res<span class="token operator">:</span> express<span class="token punctuation">.</span>Response<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_repository<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Id</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&quot;User deleted&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            res<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>error<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> UserController
+</code></pre></div><br>
+Повну структуру RESTful-сервісу для управління даними можна подивитися за <a href="https://github.com/WhtsPoint/boldak_db">посиланням</a>.
+</div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Останнє оновлення:</span> <span class="time">5/6/2023, 3:23:37 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/BD_works/design/" class="prev">
+        Проектування інформаційного забезпечення
+      </a></span> <span class="next"><a href="/BD_works/test/">
+        Тестування працездатності системи
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/BD_works/assets/js/app.d3109603.js" defer></script><script src="/BD_works/assets/js/2.3205284a.js" defer></script><script src="/BD_works/assets/js/23.d52b08e3.js" defer></script>
+  </body>
+</html>
